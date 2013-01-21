@@ -42,7 +42,7 @@ function GenerateHeader(){
     Guard="${UpperName}_H_"
     
     echo """// File: $HeaderFile
-// Author: gaoxinbo gaoxinbo1984@gmail.com
+// Author: Gao Xinbo gaoxinbo1984@gmail.com
 // Version: 1.0
 // Date: $Date
 // Copyright `date +"%Y"`, Gao Xinbo.  All rights reserved.
@@ -73,7 +73,7 @@ done`
 function GenerateCCFile(){
     touch $CCFile
     echo """// Copyright `date +"%Y"`, Gao Xinbo.  All rights reserved.
-// Author: gaoxinbo gaoxinbo1984@gmail.com
+// Author: Gao Xinbo gaoxinbo1984@gmail.com
 
 #include \"${ClassName}.h\"
 `for i in $NameSpace;do
