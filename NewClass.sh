@@ -1,15 +1,20 @@
 #!/bin/bash
 
-if [ $# != 2 ];then
+if [ $# -lt 2 ];then
     echo "usage : classname namespace"
     exit 1
 fi
 
 ClassName=$1
-NameSpace=$2
+shift
+NameSpace=$@
+ReverseNameSpace=""
+for i in $NameSpace;do
+    ReverseNameSpace="$i $ReverseNameSpace"
+done
 
-HeaderFile="$1.h"
-CCFile="$1.cc"
+HeaderFile="$ClassName.h"
+CCFile="$ClassName.cc"
 
 function CheckExist(){
     if [ $# == 0 ];then
@@ -34,18 +39,21 @@ function GenerateHeader(){
     touch $HeaderFile
     UpperName=`tr '[a-z]' '[A-Z]' <<<"$ClassName"`
     Date=`date +"%Y-%m-%d"`
+    Guard="${UpperName}_H_"
     
-    echo """// @file $HeaderFile
-// @author gaoxinbo gaoxinbo1984@gmail.com
-// @version 1.0
-// @date $Date    
+    echo """// File: $HeaderFile
+// Author: gaoxinbo gaoxinbo1984@gmail.com
+// Version: 1.0
+// Date: $Date
+// Copyright `date +"%Y"`, Gao Xinbo.  All rights reserved.
 
-#ifndef ${UpperName}_H    
-#define ${UpperName}_H    
+#ifndef ${Guard}
+#define ${Guard}
+`for i in $NameSpace;do
+    echo namespace $i {
+done`
 
-namespace ${NameSpace}{
-
-class ${ClassName}{
+class ${ClassName} {
   public:
     ${ClassName}();
     ~${ClassName}();
@@ -55,18 +63,26 @@ class ${ClassName}{
     void operator=(const ${ClassName}&);
 };
 
-} //namespace
-#endif
+`for i in ${ReverseNameSpace};do
+    echo "}  // namespace $i"
+done`
+#endif  // ${Guard}
 """ >> $HeaderFile
 }
 
 function GenerateCCFile(){
     touch $CCFile
-    echo """#include \"${ClassName}.h\"
+    echo """// Copyright `date +"%Y"`, Gao Xinbo.  All rights reserved.
+// Author: gaoxinbo gaoxinbo1984@gmail.com
 
-namespace ${NameSpace}{
+#include \"${ClassName}.h\"
+`for i in $NameSpace;do
+    echo namespace $i {
+done`
 
-} //namespace
+`for i in ${ReverseNameSpace};do
+    echo "}  // namespace $i"
+done`
 """ >> $CCFile
 }
 
