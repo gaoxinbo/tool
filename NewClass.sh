@@ -34,42 +34,40 @@ function GenerateHeader(){
     touch $HeaderFile
     UpperName=`tr '[a-z]' '[A-Z]' <<<"$ClassName"`
     Date=`date +"%Y-%m-%d"`
+    
+    echo """// @file $HeaderFile
+// @author gaoxinbo gaoxinbo1984@gmail.com
+// @version 1.0
+// @date $Date    
 
-    echo "// @file $HeaderFile" >> $HeaderFile
-    echo "// @author gaoxinbo gaoxinbo1984@gmail.com" >> $HeaderFile
-    echo "// @version 1.0 " >> $HeaderFile
-    echo "// @date $Date " >> $HeaderFile
-    echo "" >> $HeaderFile
-    echo "#ifndef ${UpperName}_H" >> $HeaderFile
-    echo "#define ${UpperName}_H" >> $HeaderFile
+#ifndef ${UpperName}_H    
+#define ${UpperName}_H    
 
-    echo "" >> $HeaderFile
-    echo "namespace ${NameSpace}{" >> $HeaderFile
-    echo "" >> $HeaderFile
-    echo "class $ClassName{" >>$HeaderFile
-    echo "  public:" >>$HeaderFile
-    echo "    ${ClassName}(); " >>$HeaderFile
-    echo "    ~${ClassName}(); " >>$HeaderFile
-    echo "" >> $HeaderFile
-    echo "  private:" >>$HeaderFile
-    echo "    ${ClassName}(const ${ClassName}&);" >> $HeaderFile
-    echo "    void operator=(const ${ClassName}&);" >> $HeaderFile
-    echo "};"                >>$HeaderFile
+namespace ${NameSpace}{
 
-    echo "" >> $HeaderFile
-    echo "} //namespace" >> $HeaderFile
+class ${ClassName}{
+  public:
+    ${ClassName}();
+    ~${ClassName}();
 
-    echo "" >>$HeaderFile
-    echo "#endif" >> $HeaderFile
-    echo "" >>$HeaderFile
+  private:
+    ${ClassName}(const ${ClassName}&);
+    void operator=(const ${ClassName}&);
+};
+
+} //namespace
+#endif
+""" >> $HeaderFile
 }
 
 function GenerateCCFile(){
     touch $CCFile
-    echo "#include \"${ClassName}.h\"" >>$CCFile
-    echo "namespace ${NameSpace}{" >>$CCFile
-    echo "}" >>$CCFile
-    echo "" >> $CCFile
+    echo """#include \"${ClassName}.h\"
+
+namespace ${NameSpace}{
+
+} //namespace
+""" >> $CCFile
 }
 
 CheckExist $HeaderFile
