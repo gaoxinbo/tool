@@ -39,7 +39,7 @@ function GenerateHeader(){
     touch $HeaderFile
     UpperName=`tr '[a-z]' '[A-Z]' <<<"$ClassName"`
     Date=`date +"%Y-%m-%d"`
-    Guard="${UpperName}_H_"
+    Guard="_${UpperName}_H_"
     
     echo """// File: $HeaderFile
 // Author: Gao Xinbo gaoxinbo1984@gmail.com
