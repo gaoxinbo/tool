@@ -13,8 +13,9 @@ for i in $NameSpace;do
     ReverseNameSpace="$i $ReverseNameSpace"
 done
 
-HeaderFile="$ClassName.h"
-CCFile="$ClassName.cc"
+LowwerName=`tr '[A-Z]' '[a-z]' <<<"$ClassName"`
+HeaderFile="$LowwerName.h"
+CCFile="$LowwerName.cc"
 
 function CheckExist(){
     if [ $# == 0 ];then
@@ -75,7 +76,7 @@ function GenerateCCFile(){
     echo """// Copyright `date +"%Y"`, Gao Xinbo.  All rights reserved.
 // Author: Gao Xinbo gaoxinbo1984@gmail.com
 
-#include \"${ClassName}.h\"
+#include \"${LowwerName}.h\"
 `for i in $NameSpace;do
     echo namespace $i {
 done`
