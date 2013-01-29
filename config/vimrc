@@ -1,0 +1,21 @@
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set number
+set incsearch
+set autoindent
+set cindent
+set ruler
+set hlsearch
+syntax on
+set showmatch
+set encoding=utf-8
+set fenc=cp936
+set fileencodings=cp936,ucs-bom,utf-8
+set termencoding=utf-8
+
+if v:lang =~? '^\(zh\)\|\(ja\)\|\(ko\)' 
+    set ambiwidth=double
+endif
+
+"set nobomb
