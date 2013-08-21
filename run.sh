@@ -35,3 +35,17 @@ else
   end
 fi
 
+
+red "install python tool"
+end
+(cd python;./run.sh)
+
+if [ "$?" != "0" ];then
+  red "install py tool error"
+  end
+else
+  green "install py tool succeed"
+  end
+fi
+
+
