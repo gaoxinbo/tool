@@ -33,7 +33,7 @@ function CheckExist(){
         esac 
     fi
 
-    rm $filename -f
+    rm -f $filename 
 }
 
 function GenerateHeader(){
@@ -43,10 +43,10 @@ function GenerateHeader(){
     Guard="_${UpperName}_H_"
     
     echo """// File: $HeaderFile
-// Author: Gao Xinbo gaoxinbo1984@gmail.com
+// Author: Xinbo Gao gaoxinbo1984@gmail.com
 // Version: 1.0
 // Date: $Date
-// Copyright `date +"%Y"`, Gao Xinbo.  All rights reserved.
+// Copyright `date +"%Y"`, Xinbo Gao.  All rights reserved.
 
 #ifndef ${Guard}
 #define ${Guard}
@@ -73,8 +73,8 @@ done`
 
 function GenerateCCFile(){
     touch $CCFile
-    echo """// Copyright `date +"%Y"`, Gao Xinbo.  All rights reserved.
-// Author: Gao Xinbo gaoxinbo1984@gmail.com
+    echo """// Copyright `date +"%Y"`, Xinbo Gao.  All rights reserved.
+// Author: Xinbo Gao gaoxinbo1984@gmail.com
 
 #include \"${LowwerName}.h\"
 `for i in $NameSpace;do
