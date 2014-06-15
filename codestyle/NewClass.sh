@@ -46,7 +46,7 @@ function GenerateHeader(){
 // Author: Xinbo Gao gaoxinbo1984@gmail.com
 // Version: 1.0
 // Date: $Date
-// Copyright `date +"%Y"`, Xinbo Gao.  All rights reserved.
+// Copyright `date +"%Y"`, Xinbo Gao. All rights reserved.
 
 #ifndef ${Guard}
 #define ${Guard}
@@ -61,7 +61,7 @@ class ${ClassName} {
 
   private:
     ${ClassName}(const ${ClassName}&);
-    void operator=(const ${ClassName}&);
+    ${ClassName} & operator=(const ${ClassName}&);
 };
 
 `for i in ${ReverseNameSpace};do
